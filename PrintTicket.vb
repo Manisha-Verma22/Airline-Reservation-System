@@ -1,6 +1,9 @@
 Imports System.Drawing.Printing
+
 Public Class PrintTicket
     Inherits System.Windows.Forms.Form
+
+    ' Passenger ticket printing form for the Airline Reservation System.
 
 #Region " Windows Form Designer generated code "
 
@@ -28,13 +31,14 @@ Public Class PrintTicket
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     Friend WithEvents rtbTicket As System.Windows.Forms.RichTextBox
     Friend WithEvents prndocPrintTicket As System.Drawing.Printing.PrintDocument
     Friend WithEvents prndlgPrintTicket As System.Windows.Forms.PrintDialog
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmdPrint As System.Windows.Forms.Button
+
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.rtbTicket = New System.Windows.Forms.RichTextBox()
         Me.prndocPrintTicket = New System.Drawing.Printing.PrintDocument()
@@ -90,8 +94,8 @@ Public Class PrintTicket
     End Sub
 
 #End Region
-    Friend strPNRNo, strName, strSector, strFlightNo, strClass, strDate, strDepTime, strArrTime, Status As String
 
+    Friend strPNRNo, strName, strSector, strFlightNo, strClass, strDate, strDepTime, strArrTime, Status As String
 
     Private Sub PrintTicket_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         rtbTicket.BackColor = Color.White
@@ -122,4 +126,5 @@ Public Class PrintTicket
     Private Sub prndocPrintTicket_PrintPage(ByVal sender As Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles prndocPrintTicket.PrintPage
         e.Graphics.DrawString(rtbTicket.Text, New Font("MS Sans Seri", 12, FontStyle.Regular), Brushes.Black, 150, 125)
     End Sub
+
 End Class
