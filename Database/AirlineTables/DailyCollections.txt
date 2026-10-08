@@ -1,0 +1,5 @@
+create table DailyCollections(
+PnrNo Char(8),
+TranDate date,
+TranType char(15),
+Amount number)

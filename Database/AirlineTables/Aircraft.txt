@@ -1,0 +1,8 @@
+create table Aircraft(
+AircraftTypeID char(4) primary key,
+Description Char(100),
+FirstClassSeats number,
+BusinessClassSeats number,
+EconomyClassSeats number);
+
+/

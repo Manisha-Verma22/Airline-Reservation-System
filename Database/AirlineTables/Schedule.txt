@@ -1,0 +1,8 @@
+create table ScheduledFlights(
+ScheduleID char(5) Primary key,
+FlightNo char(5),
+FlightDate date,
+FirstClassSeatsAvailable number,
+BusinessClassSeatsAvailable number,
+EconomyClassSeatsAvailable number,
+foreign key (FlightNo) references Flights(FlightNo))

@@ -1,0 +1,9 @@
+create table Flights (
+FlightNo char(5) primary key,
+DepTime char(5),
+ArrTime char(5),
+AircraftTypeID char(4),
+SectorID char(5),
+ foreign key (AircraftTypeID) references Aircraft(AircraftTypeID),
+ foreign key (SectorID) references Sector(SectorID))
+/

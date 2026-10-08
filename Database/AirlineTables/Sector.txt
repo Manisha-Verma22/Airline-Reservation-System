@@ -1,0 +1,9 @@
+create table Sector(
+SectorID char(5) primary key,
+Description varchar(50),
+WeekDay1 char(3),
+WeekDay2 char(3),
+FirstClassFare number,
+BusinessClassFare number,
+EconomyClassFare number)
+

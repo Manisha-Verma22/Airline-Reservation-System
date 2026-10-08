@@ -1,0 +1,14 @@
+create table Passengers(
+PnrNo char(8) primary key,
+FlightNo char(5),
+TravelDate date,
+FName char(50),
+LName char(50),
+Age number,
+Gender char(1),
+Class char(15),
+SeatPref char(6),
+MealPref char(15),
+SSR char(100),
+Status char(15),
+foreign key (flightNo) references Flights(flightno))
