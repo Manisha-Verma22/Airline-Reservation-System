@@ -1,6 +1,9 @@
 Imports CommonClasses
+
 Public Class MainMenu
     Inherits System.Windows.Forms.Form
+
+    ' Main menu form for the Airline Reservation System.
 
 #Region " Windows Form Designer generated code "
 
@@ -28,7 +31,7 @@ Public Class MainMenu
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     Friend WithEvents MainMenu1 As System.Windows.Forms.MainMenu
     Friend WithEvents mnuBookings As System.Windows.Forms.MenuItem
@@ -44,6 +47,7 @@ Public Class MainMenu
     Friend WithEvents MenuItem4 As System.Windows.Forms.MenuItem
     Friend WithEvents MenuItem5 As System.Windows.Forms.MenuItem
     Friend WithEvents MenuItem6 As System.Windows.Forms.MenuItem
+
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.MainMenu1 = New System.Windows.Forms.MainMenu()
         Me.mnuBookings = New System.Windows.Forms.MenuItem()
@@ -59,78 +63,93 @@ Public Class MainMenu
         Me.MenuItem5 = New System.Windows.Forms.MenuItem()
         Me.mnuExit = New System.Windows.Forms.MenuItem()
         Me.MenuItem6 = New System.Windows.Forms.MenuItem()
+
         '
         'MainMenu1
         '
         Me.MainMenu1.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuBookings, Me.MenuItem1, Me.MenuItem2, Me.mnuExit})
+
         '
         'mnuBookings
         '
         Me.mnuBookings.Index = 0
         Me.mnuBookings.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuReservation, Me.mnuCancellation})
         Me.mnuBookings.Text = "Bookings"
+
         '
         'mnuReservation
         '
         Me.mnuReservation.Index = 0
         Me.mnuReservation.Text = "Reservation"
+
         '
         'mnuCancellation
         '
         Me.mnuCancellation.Index = 1
         Me.mnuCancellation.Text = "Cancellation"
+
         '
         'MenuItem1
         '
         Me.MenuItem1.Index = 1
         Me.MenuItem1.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.mnuConfirmedPassengers, Me.mnuWaitingList, Me.mnuDailyCollection})
         Me.MenuItem1.Text = "Reports"
+
         '
         'mnuConfirmedPassengers
         '
         Me.mnuConfirmedPassengers.Index = 0
         Me.mnuConfirmedPassengers.Text = "Confirmed Passenger List"
+
         '
         'mnuWaitingList
         '
         Me.mnuWaitingList.Index = 1
         Me.mnuWaitingList.Text = "Overbooking/Waiting List"
+
         '
         'mnuDailyCollection
         '
         Me.mnuDailyCollection.Index = 2
         Me.mnuDailyCollection.Text = "Daily Collections Report"
+
         '
         'MenuItem2
         '
         Me.MenuItem2.Index = 2
         Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItem3, Me.MenuItem4, Me.MenuItem5, Me.MenuItem6})
         Me.MenuItem2.Text = "Tables"
+
         '
         'MenuItem3
         '
         Me.MenuItem3.Index = 0
         Me.MenuItem3.Text = "Sector"
+
         '
         'MenuItem4
         '
         Me.MenuItem4.Index = 1
         Me.MenuItem4.Text = "Aircraft"
+
         '
         'MenuItem5
         '
         Me.MenuItem5.Index = 2
         Me.MenuItem5.Text = "Flights"
+
         '
         'mnuExit
         '
         Me.mnuExit.Index = 3
         Me.mnuExit.Text = "Exit"
+
         '
         'MenuItem6
         '
         Me.MenuItem6.Index = 3
         Me.MenuItem6.Text = "Schedule Flights"
+
         '
         'MainMenu
         '
@@ -144,7 +163,9 @@ Public Class MainMenu
     End Sub
 
 #End Region
+
     Public Shared Flag As Boolean
+
     Private Sub mnuReservation_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuReservation.Click
         Dim frmReservations As New Reservations()
         frmReservations.MdiParent = Me
@@ -162,6 +183,7 @@ Public Class MainMenu
             MsgBox("You must close the Booking window , to move master tables", MsgBoxStyle.Information, "Information")
             Exit Sub
         End If
+
         Dim frmSector As New Sector()
         frmSector.MdiParent = Me
         frmSector.Show()
@@ -172,6 +194,7 @@ Public Class MainMenu
             MsgBox("You must close the Booking window , to move master tables", MsgBoxStyle.Information, "Information")
             Exit Sub
         End If
+
         Dim frmAircraft As New Aircraft()
         frmAircraft.MdiParent = Me
         frmAircraft.Show()
@@ -182,6 +205,7 @@ Public Class MainMenu
             MsgBox("You must close the Booking window , to move master tables", MsgBoxStyle.Information, "Information")
             Exit Sub
         End If
+
         Dim frmFlights As New Flights()
         frmFlights.MdiParent = Me
         frmFlights.Show()
@@ -192,4 +216,5 @@ Public Class MainMenu
         frmSheduleflights.MdiParent = Me
         frmSheduleflights.Show()
     End Sub
+
 End Class
