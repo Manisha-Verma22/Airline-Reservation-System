@@ -1,7 +1,10 @@
 Imports CommonClasses
 Imports System.Data.SqlClient
+
 Public Class Flights
     Inherits System.Windows.Forms.Form
+
+    ' Flight management form for the Airline Reservation System.
 
 #Region " Windows Form Designer generated code "
 
@@ -50,6 +53,7 @@ Public Class Flights
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents cmbACTID As System.Windows.Forms.ComboBox
     Friend WithEvents CmbSectorID As System.Windows.Forms.ComboBox
+
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.cmdNew = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
@@ -232,7 +236,9 @@ Public Class Flights
     End Sub
 
 #End Region
+
     Dim ch As String
+
     Sub PopulateCmbACTID()
         Try
             Dim objDB As New DBCon()
@@ -246,6 +252,7 @@ Public Class Flights
             MsgBox(ex.Source & ":" & ex.Message, MsgBoxStyle.Information, "Error")
         End Try
     End Sub
+
     Sub PopulateCmbSectorID()
         Try
             Dim objDB As New DBCon()
@@ -259,6 +266,7 @@ Public Class Flights
             MsgBox(ex.Source & ":" & ex.Message, MsgBoxStyle.Information, "Error")
         End Try
     End Sub
+
     Sub PopulateLsFN()
         Try
             Dim objDB As New DBCon()
@@ -280,11 +288,12 @@ Public Class Flights
         Dim intCtr, intMaxFNO As Integer
 
         strPrefix = "HA"
-
         objDBCon.sQry = "Select max(FlightNo) from Flights"
+
         Try
             FObj = objDBCon.GetData
             strMaxFNO = FObj.Tables(0).Rows(0).Item(0).ToString
+
             If strMaxFNO = "" Then
                 strFNO = strPrefix & "001"
             Else
@@ -292,19 +301,22 @@ Public Class Flights
                 intMaxFNO += 1
                 strMaxFNO = CStr(intMaxFNO)
                 strFNO = strPrefix
+
                 Dim intCnt, intLen As Integer
                 intLen = 3 - strMaxFNO.Length
+
                 For intCnt = 0 To intLen - 1
                     strFNO &= "0"
                 Next
+
                 strFNO &= intMaxFNO
             End If
         Catch e As Exception
             Return vbNullString
         End Try
+
         Return strFNO
     End Function
-
 
     Sub InitializeControls()
         cmbACTID.Text = ""
@@ -313,7 +325,6 @@ Public Class Flights
         txtFN.Text = ""
         cmdEdit.Enabled = False
     End Sub
-
 
     Sub EnablesFields(ByVal toggle As Boolean)
         txtArrTime.Enabled = toggle
@@ -342,26 +353,32 @@ Public Class Flights
             MsgBox("Enter Departure Time ", MsgBoxStyle.Information, "Input Error")
             Exit Sub
         End If
+
         If Len(Trim(txtArrTime.Text)) = 0 Then
             MsgBox("Enter Arrival Time ", MsgBoxStyle.Information, "Input Error")
             Exit Sub
         End If
+
         If Len(Trim(cmbACTID.Text)) = 0 Then
             MsgBox("Select Aircraft Type ID ", MsgBoxStyle.Information, "Input Error")
             Exit Sub
         End If
+
         If Len(Trim(CmbSectorID.Text)) = 0 Then
             MsgBox("Enter Sector ID", MsgBoxStyle.Information, "Input Error")
             Exit Sub
         End If
+
         Dim objDBCon As New DBCon()
         Dim objSqlCon As SqlConnection
+
         If ch = "i" Then
             SqlInsert.Parameters("@FlightNo").Value = txtFN.Text
             SqlInsert.Parameters("@DepTime").Value = txtDepTime.Text
             SqlInsert.Parameters("@ArrTime").Value = txtArrTime.Text
             SqlInsert.Parameters("@AircraftTypeID").Value = cmbACTID.Text
             SqlInsert.Parameters("@SectorID").Value = CmbSectorID.Text
+
             Try
                 objSqlCon = objDBCon.EstablishConnection()
                 objSqlCon.Open()
@@ -385,6 +402,7 @@ Public Class Flights
                 SqlModify.Parameters("@ArrTime").Value = txtArrTime.Text
                 SqlModify.Parameters("@AircraftTypeID").Value = cmbACTID.Text
                 SqlModify.Parameters("@SectorID").Value = CmbSectorID.Text
+
                 Try
                     objSqlCon = objDBCon.EstablishConnection()
                     objSqlCon.Open()
@@ -411,6 +429,7 @@ Public Class Flights
             MsgBox("Select Flight Number to modify", MsgBoxStyle.Information, "Modify")
             Exit Sub
         End If
+
         EnablesFields(True)
         txtFN.Enabled = False
         ch = "e"
@@ -425,9 +444,12 @@ Public Class Flights
             MsgBox("Select the Flight Number to be deleted", MsgBoxStyle.Information, "Delete")
             Exit Sub
         End If
+
         Dim objDBCon As New DBCon()
         Dim objSqlCon As SqlConnection
+
         SqlDelete.Parameters("@FlightNo").Value = txtFN.Text.ToString
+
         Try
             objSqlCon = objDBCon.EstablishConnection()
             objSqlCon.Open()
@@ -447,11 +469,14 @@ Public Class Flights
         cmdNew.Enabled = True
         EnablesFields(False)
     End Sub
+
     Sub readRec()
         Dim objDBCon As New DBCon()
         Dim rsSector As New DataSet()
+
         objDBCon.sQry = "select FlightNo,DepTime,ArrTime,AircraftTypeID,SectorID from Flights where FlightNo = '" & lstFlightNo.SelectedValue & "' "
         rsSector = objDBCon.GetData()
+
         txtFN.Text = rsSector.Tables(0).Rows(0).Item("FlightNo").ToString
         txtDepTime.Text = rsSector.Tables(0).Rows(0).Item("DepTime").ToString
         txtArrTime.Text = rsSector.Tables(0).Rows(0).Item("ArrTime").ToString
@@ -469,10 +494,13 @@ Public Class Flights
         PopulateLsFN()
         InitializeControls()
         EnablesFields(False)
+
         If lstFlightNo.Items.Count > 0 Then
             lstFlightNo.SelectedIndex = 0
             readRec()
         End If
+
         txtFN.Enabled = False
     End Sub
+
 End Class
