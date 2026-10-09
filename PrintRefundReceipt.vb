@@ -1,6 +1,8 @@
 Public Class PrintRefundReceipt
     Inherits System.Windows.Forms.Form
 
+    ' Form for displaying and printing passenger refund receipts.
+
 #Region " Windows Form Designer generated code "
 
     Public Sub New()
@@ -27,13 +29,14 @@ Public Class PrintRefundReceipt
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     Friend WithEvents cmdClose As System.Windows.Forms.Button
     Friend WithEvents cmdPrint As System.Windows.Forms.Button
     Friend WithEvents prndlgPrintRefundReceipt As System.Windows.Forms.PrintDialog
     Friend WithEvents prndocPrintRefundReceipt As System.Drawing.Printing.PrintDocument
     Friend WithEvents rtbRefundReceipt As System.Windows.Forms.RichTextBox
+
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.cmdClose = New System.Windows.Forms.Button()
         Me.cmdPrint = New System.Windows.Forms.Button()
@@ -89,11 +92,14 @@ Public Class PrintRefundReceipt
     End Sub
 
 #End Region
+
     Friend strPnrNo, strName As String
     Friend dRefundAmt As Decimal
+
     Private Sub cmdPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdPrint.Click
         prndlgPrintRefundReceipt.Document = prndocPrintRefundReceipt
         Dim result As DialogResult = prndlgPrintRefundReceipt.ShowDialog()
+
         If result = Windows.Forms.DialogResult.OK Then
             prndocPrintRefundReceipt.Print()
         End If
@@ -119,4 +125,5 @@ Public Class PrintRefundReceipt
     Private Sub cmdClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdClose.Click
         Close()
     End Sub
+
 End Class
