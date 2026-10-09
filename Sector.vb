@@ -1,6 +1,7 @@
 Imports CommonClasses
 Imports System.Data.SqlClient
 Public Class Sector
+ ' Manages airline sector details, schedules, and class fares.
     Inherits System.Windows.Forms.Form
 
 #Region " Windows Form Designer generated code "
